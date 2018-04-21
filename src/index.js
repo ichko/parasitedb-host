@@ -2,11 +2,9 @@ const express = require('express');
 const { upload } = require('./uploader');
 
 const port = 3000;
-const dataLocation = 'pieces';
+const dataLocation = 'data';
 
 const app = express();
-
-app.use(`/${dataLocation}`, express.static(dataLocation));
 
 app.use(function (req, res, next) {
   req.rawBody = '';
@@ -16,7 +14,7 @@ app.use(function (req, res, next) {
 
 app.post('/upload', function (req, res) {
   function getUrl(fileName) {
-    return `${req.protocol}://${req.get('host')}/${dataLocation}/${fileName}`;
+    return `${req.protocol}://${req.get('host')}/${fileName}`;
   }
 
   upload(req.rawBody, dataLocation).then(
@@ -24,6 +22,8 @@ app.post('/upload', function (req, res) {
     err => res.status(500).send(err)
   );
 });
+
+app.use(`/`, express.static(dataLocation));
 
 console.log(`Parasitedb host listening on port ${port}.`);
 app.listen(port);
