@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node src/index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "IZ",
+  "license": "Apache 2.0",
   "dependencies": {
     "express": "^4.16.3",
     "sha256": "^0.2.0"
