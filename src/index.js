@@ -1,7 +1,7 @@
 const express = require('express');
 const { upload } = require('./uploader');
 
-const port = 3000;
+const port = 3333;
 const dataLocation = 'data';
 
 const app = express();
