@@ -13,6 +13,10 @@ module.exports = {
     const fileName = getUploadName();
     const uploadLocation = getUploadLocation(fileName, location);
 
+    if (!fs.existsSync(location)) {
+      fs.mkdirSync(location);
+    }
+
     return new Promise((resolve, reject) => {
       fs.writeFile(uploadLocation, new Buffer(data, 'binary'), error => {
         if (error) {
