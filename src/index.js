@@ -6,13 +6,13 @@ const dataLocation = 'data';
 
 const app = express();
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   req.rawBody = '';
   req.on('data', chunk => req.rawBody += chunk.toString('binary'));
   req.on('end', () => next());
 });
 
-app.post('/upload', function (req, res) {
+app.post('/', (req, res) => {
   function getUrl(fileName) {
     return `${req.protocol}://${req.get('host')}/${fileName}`;
   }
@@ -23,7 +23,7 @@ app.post('/upload', function (req, res) {
   );
 });
 
-app.use(`/`, express.static(dataLocation));
+app.use('/', express.static(dataLocation));
 
 console.log(`Parasitedb host listening on port ${port}.`);
 app.listen(port);
